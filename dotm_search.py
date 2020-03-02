@@ -15,13 +15,15 @@ import zipfile
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument(
-    '-dir', '--output', help='Output file name', default='')
+parser.add_argument('--dir', dest='direct', type=str, default='dotm_files/',
+                    help='path to folder')
+# parser.add_argument(
+#     '--dir', '--output', help='Output file name', default='')
 requiredNamed = parser.add_argument_group('required named arguments')
 requiredNamed.add_argument(
     'input', help='Input file name')
 args = parser.parse_args()
-direct = args.output
+direct = args.direct
 search_term = args.input
 
 
@@ -69,8 +71,8 @@ def main():
                                 if search_term in line:
                                     match = True
                                     start = line.index(search_term)
-                                    print(full_filename + '/' + name + ': ' +
-                                          line[start - 20:start + 20] + '\n')
+                                    print('Match found in file ' + full_filename +
+                                          '\n' + line[start - 20:start + 20] + '\t' + '\n')
                                     # print(line.index(search_term))
                     if match == True:
                         matches += 1
